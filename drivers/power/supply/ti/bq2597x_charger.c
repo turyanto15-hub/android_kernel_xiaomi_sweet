@@ -1112,13 +1112,16 @@ static int bq2597x_get_adc_data(struct bq2597x *bq, int channel,  int *result)
 	t |= (val >> 8) & 0xFF;
 	*result = t;
 
-	if (bq->chip_vendor == SC8551) {
-		kernel_neon_begin();
-		if (bq->mass_production)
-			*result = (int)(t * sc8551_adc_lsb_non_calibrate[channel]);
-		else
-			*result = (int)(t * sc8551_adc_lsb[channel]);
-		kernel_neon_end();
+if (bq->chip_vendor == SC8551) {
+	if (bq->mass_production)
+		*result = (int)(((s64)t *
+			sc8551_adc_lsb_non_calibrate_x10000[channel]) /
+			SC8551_ADC_LSB_SCALE);
+	else
+		*result = (int)(((s64)t *
+			sc8551_adc_lsb_x10000[channel]) /
+			SC8551_ADC_LSB_SCALE);
+}
 	}
 
 	return 0;
