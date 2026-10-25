@@ -1095,36 +1095,37 @@ static int bq2597x_set_adc_bits(struct bq2597x *bq, int bits)
 EXPORT_SYMBOL_GPL(bq2597x_set_adc_bits);
 
 #define ADC_REG_BASE 0x16
-static int bq2597x_get_adc_data(struct bq2597x *bq, int channel,  int *result)
+static int bq2597x_get_adc_data(struct bq2597x *bq, int channel,
+                                int *result)
 {
-	int ret;
-	u16 val;
-	s16 t;
+        int ret;
+        u16 val;
+        s16 t;
 
-	if (channel < 0 || channel >= ADC_MAX_NUM)
-		return -EINVAL;
+        if (channel < 0 || channel >= ADC_MAX_NUM)
+                return -EINVAL;
 
-	ret = bq2597x_read_word(bq, ADC_REG_BASE + (channel << 1), &val);
-	if (ret < 0)
-		return ret;
-	t = val & 0xFF;
-	t <<= 8;
-	t |= (val >> 8) & 0xFF;
-	*result = t;
+        ret = bq2597x_read_word(bq, ADC_REG_BASE + (channel << 1), &val);
+        if (ret < 0)
+                return ret;
 
-if (bq->chip_vendor == SC8551) {
-	if (bq->mass_production)
-		*result = (int)(((s64)t *
-			sc8551_adc_lsb_non_calibrate_x10000[channel]) /
-			SC8551_ADC_LSB_SCALE);
-	else
-		*result = (int)(((s64)t *
-			sc8551_adc_lsb_x10000[channel]) /
-			SC8551_ADC_LSB_SCALE);
-}
-	}
+        t = val & 0xFF;
+        t <<= 8;
+        t |= (val >> 8) & 0xFF;
+        *result = t;
 
-	return 0;
+        if (bq->chip_vendor == SC8551) {
+                if (bq->mass_production)
+                        *result = (int)(((s64)t *
+                                sc8551_adc_lsb_non_calibrate_x10000[channel]) /
+                                SC8551_ADC_LSB_SCALE);
+                else
+                        *result = (int)(((s64)t *
+                                sc8551_adc_lsb_x10000[channel]) /
+                                SC8551_ADC_LSB_SCALE);
+        }
+
+        return 0;
 }
 EXPORT_SYMBOL_GPL(bq2597x_get_adc_data);
 
