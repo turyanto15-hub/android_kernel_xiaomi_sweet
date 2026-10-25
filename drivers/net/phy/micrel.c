@@ -724,8 +724,11 @@ static void kszphy_get_strings(struct phy_device *phydev, u8 *data)
 	int i;
 
 	for (i = 0; i < ARRAY_SIZE(kszphy_hw_stats); i++) {
-		memcpy(data + i * ETH_GSTRING_LEN,
-		       kszphy_hw_stats[i].string, ETH_GSTRING_LEN);
+		char *buf = (char *)data + i * ETH_GSTRING_LEN;
+
+		memset(buf, 0, ETH_GSTRING_LEN);
+		strlcpy(buf, kszphy_hw_stats[i].string,
+			ETH_GSTRING_LEN);
 	}
 }
 
