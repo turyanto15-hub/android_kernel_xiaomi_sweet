@@ -914,7 +914,7 @@ bool dc_set_backlight(struct dsi_panel *panel, u32 bl_lvl)
 {
 	int i = 0;
 	int crcValue = 255;
-	float mDCBLCoeff[2] = {0.5125, 4.9};
+	crcValue = (int)(((u64)5125 * bl_lvl + 54000) / 10000);
 	struct dsi_cmd_desc *cmds = NULL;
 	struct dsi_display_mode_priv_info *priv_info = panel->cur_mode->priv_info;
 	int writeCmd[21] = {1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1};
