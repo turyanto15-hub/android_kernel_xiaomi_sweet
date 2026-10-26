@@ -6569,7 +6569,7 @@ ssize_t dsi_panel_mipi_reg_write(struct dsi_panel *panel,
 			goto exit_free0;
 		}
 		if (tmp_data > sizeof(g_dsi_read_cfg.rbuf)) {
-			pr_err("read size exceeding the limit %d\n",
+			pr_err("read size exceeding the limit %zu\n",
 					sizeof(g_dsi_read_cfg.rbuf));
 			goto exit_free0;
 		}
