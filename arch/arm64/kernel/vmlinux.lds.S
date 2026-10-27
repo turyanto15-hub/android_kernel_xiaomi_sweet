@@ -74,6 +74,9 @@ jiffies = jiffies_64;
 	KEEP(*(.bss.rtic))			\
 	. = ALIGN(PAGE_SIZE);				\
 	VMLINUX_SYMBOL(__bss_rtic_end) = .;
+
+#undef BSS_FIRST_SECTIONS
+#define BSS_FIRST_SECTIONS RTIC_BSS
 /*
  * The size of the PE/COFF section that covers the kernel image, which
  * runs from stext to _edata, must be a round multiple of the PE/COFF
@@ -254,9 +257,6 @@ SECTIONS
 
 	HEAD_SYMBOLS
 
-	.bss : {			/* bss segment		*/
-         RTIC_BSS
-	}
 }
 
 /*
