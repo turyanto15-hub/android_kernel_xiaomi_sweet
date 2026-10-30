@@ -26,8 +26,8 @@
 #define Elf_Addr    Elf32_Addr
 #define Elf_Sword   Elf64_Sword
 #define Elf_Section Elf32_Half
-#define ELF_ST_BIND ELF32_ST_BIND
-#define ELF_ST_TYPE ELF32_ST_TYPE
+#define ELF_ST_BIND(x) (((x) >> 4) & 0xf)
+#define ELF_ST_TYPE(x) ((x) & 0xf)
 
 #define Elf_Rel     Elf32_Rel
 #define Elf_Rela    Elf32_Rela
@@ -41,8 +41,8 @@
 #define Elf_Addr    Elf64_Addr
 #define Elf_Sword   Elf64_Sxword
 #define Elf_Section Elf64_Half
-#define ELF_ST_BIND ELF64_ST_BIND
-#define ELF_ST_TYPE ELF64_ST_TYPE
+#define ELF_ST_BIND(x) (((x) >> 4) & 0xf)
+#define ELF_ST_TYPE(x) ((x) & 0xf)
 
 #define Elf_Rel     Elf64_Rel
 #define Elf_Rela    Elf64_Rela

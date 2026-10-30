@@ -348,7 +348,7 @@ int param_set_invbool(const char *val, const struct kernel_param *kp)
 {
 	int ret;
 	bool boolval;
-	struct kernel_param dummy;
+	struct kernel_param dummy = *kp;
 
 	dummy.arg = &boolval;
 	ret = param_set_bool(val, &dummy);

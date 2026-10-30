@@ -231,6 +231,8 @@ type_specifier:
 		{ remove_node($1); (*$2)->tag = SYM_STRUCT; $$ = $2; }
 	| UNION_KEYW IDENT
 		{ remove_node($1); (*$2)->tag = SYM_UNION; $$ = $2; }
+	| UNION_KEYW ATTRIBUTE_PHRASE IDENT
+		{ remove_node($1); (*$3)->tag = SYM_UNION; $$ = $3; }
 	| ENUM_KEYW IDENT
 		{ remove_node($1); (*$2)->tag = SYM_ENUM; $$ = $2; }
 

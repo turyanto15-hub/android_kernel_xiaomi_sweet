@@ -1,0 +1,3 @@
+input  = /data/data/com.termux/files/home/android_kernel_xiaomi_sweet/out/arch/arm64/boot/dts/qcom/sdmmagpie.dtb
+output = audit-results/merged-test.dtb
+overlay[0] = /data/data/com.termux/files/home/android_kernel_xiaomi_sweet/out/arch/arm64/boot/dts/qcom/sweet-sdmmagpie-overlay.dtbo

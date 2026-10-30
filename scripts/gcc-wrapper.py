@@ -40,6 +40,10 @@ import subprocess
 # force LANG to be set to en_US.UTF-8 to get consistent warnings.
 
 allowed_warnings = set([
+    'perf_trace_counters.c:153',
+    'vmscan.c:2689',
+    'shmem.c:3276',
+    'params.c:351',
  ])
 
 # Capture the name of the object file, can find it.

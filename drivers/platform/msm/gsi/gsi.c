@@ -4275,7 +4275,6 @@ EXPORT_SYMBOL(gsi_halt_channel_ee);
 int gsi_alloc_channel_ee(unsigned int chan_idx, unsigned int ee, int *code)
 {
 	enum gsi_generic_ee_cmd_opcode op = GSI_GEN_EE_CMD_ALLOC_CHANNEL;
-	struct gsi_chan_ctx *ctx;
 	uint32_t val;
 	int res;
 
@@ -4330,10 +4329,6 @@ int gsi_alloc_channel_ee(unsigned int chan_idx, unsigned int ee, int *code)
 		GSIERR("No response received\n");
 		res = -GSI_STATUS_ERROR;
 		goto free_lock;
-	}
-	if (ee == 0) {
-		ctx = &gsi_ctx->chan[chan_idx];
-		gsi_ctx->ch_dbg[chan_idx].ch_allocate++;
 	}
 	res = GSI_STATUS_SUCCESS;
 	*code = gsi_ctx->scratch.word0.s.generic_ee_cmd_return_code;
