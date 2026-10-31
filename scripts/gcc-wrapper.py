@@ -44,6 +44,8 @@ allowed_warnings = set([
     'vmscan.c:2689',
     'shmem.c:3276',
     'params.c:351',
+    'cmpxchg.h:38',
+    'atomic_ll_sc.h:259',
  ])
 
 # Capture the name of the object file, can find it.
