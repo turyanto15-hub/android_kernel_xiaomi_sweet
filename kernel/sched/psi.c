@@ -1192,7 +1192,7 @@ unsigned int psi_trigger_poll(void **trigger_ptr, struct file *file,
 static ssize_t psi_write(struct file *file, const char __user *user_buf,
 			 size_t nbytes, enum psi_res res)
 {
-	char buf[32];
+	char buf[32] = { 0 };
 	size_t buf_size;
 	struct seq_file *seq;
 	struct psi_trigger *new;
